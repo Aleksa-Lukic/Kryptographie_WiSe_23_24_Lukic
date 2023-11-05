@@ -8,7 +8,7 @@ The first 8 bytes of the PNG file you provided are:
 
 # Aufgabe 2
 
-## [Python: Aufgabe_02_One_Time_Pad.py]("Uebung_3\scripts\Uebung_03_Aufgabe_02_One_Time_Pad.py")
+## [Python: Aufgabe_02_One_Time_Pad.py]("blob/main/Uebung_3/scripts/Uebung_03_Aufgabe_02_One_Time_Pad.py")
 
 #### a)
 
