@@ -29,7 +29,7 @@ import binascii
 
 #CONSTANTS
 PNG_8_BIT_MAGIC_NUMBER_HEX = "89504e470d0a1a0a"
-PNG_FILE_PATH = Path(__file__).parent / "files" / "encrypted.png"
+PNG_FILE_PATH = Path(__file__).parent.parent / "files" / "encrypted.png"
 
 
 def check_png_header(png: str, magic_number_hex: str):
@@ -48,15 +48,34 @@ def check_png_header(png: str, magic_number_hex: str):
     header_hex = binascii.hexlify(header).decode("UTF-8")
     print(header_hex)
     if header_hex == magic_number_hex:
-        return True
+        print("Die Datei ist eine gültige PNG-Datei.")
     else:
-        return False
+        print("Die Datei ist keine gültige PNG-Datei oder der Header stimmt nicht überein.")
+ 
+ 
+# b)
+
+key = "89504E4A".encode('utf-8')
 
 
-if check_png_header(png=PNG_FILE_PATH, magic_number_hex=PNG_8_BIT_MAGIC_NUMBER_HEX):
-    print("Die Datei ist eine gültige PNG-Datei.")
-else:
-    print("Die Datei ist keine gültige PNG-Datei oder der Header stimmt nicht überein.")
+def decrypt_file(filename, key):
+    with open(filename, "rb") as f:
+        file_contents = f.read()
+
+    # Convert the key to a byte array
+    key_as_byte_array = binascii.unhexlify(key)
+
+    # Convert the file_contents to a byte array
+    file_contents_as_byte_array = bytearray(file_contents)
+
+    # XOR each byte in file_contents with the corresponding byte in key_as_byte_array
+    decrypted_file_contents = bytearray()
+    for i in range(len(file_contents_as_byte_array)):
+        decrypted_byte = file_contents_as_byte_array[i] ^ key_as_byte_array[i % len(key_as_byte_array)]
+        decrypted_file_contents.append(decrypted_byte)
+
+    return bytes(decrypted_file_contents)
 
 
 
+print(decrypt_file(PNG_FILE_PATH, key=key))
