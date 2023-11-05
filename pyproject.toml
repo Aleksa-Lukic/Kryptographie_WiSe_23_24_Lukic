@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "kryptographie-wise-23-24-lukic"
+version = "0.1.0"
+description = "Repo for Study"
+authors = ["Lukic"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
